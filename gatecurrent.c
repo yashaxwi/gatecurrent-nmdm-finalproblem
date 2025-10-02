@@ -24,7 +24,7 @@ int main() {
     
     int params_read = fscanf(input_file, "%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%d", &gate_voltage, &oxide_thickness, &channel_thickness, &m_gate_eff, &m_oxide_eff, &m_channel_eff, &Emin, &Emax, &slice_number);
     
-       fclose(input_file);//input data stored
+       fclose(input_file);//inputs were taken from input_parameters.txt file and file is closed.
     
     
     if (params_read != 9) {
