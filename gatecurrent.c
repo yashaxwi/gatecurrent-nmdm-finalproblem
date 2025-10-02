@@ -1,5 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+
+double sqre(double x){
+  return x * x;//this function will return x^2...
+}
+
+
 
 int main() {
     //defning constants
@@ -34,6 +41,7 @@ int main() {
     
     
     
+    printf("Parameters loaded successfully from input_parameters.txt\n");
     
     
     
