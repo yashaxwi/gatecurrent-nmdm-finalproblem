@@ -4,6 +4,7 @@
 
 
 
+#define maxpoints 10000 //datapoitns from tansmition_data.txt
 #define k_B 8.617333e-5 //in eV/Kelvin
 #define q_magnitude 1.602e-19 //in Coulombs
 
@@ -20,7 +21,6 @@ double fermidirac(double E, double E_f, double T ){
  
   double power = ( E - E_f ) / ( k_B * T );
 
-
   if(power > 100){
     return 0; //fermi function value will become 0
   }
@@ -35,6 +35,9 @@ double fermidirac(double E, double E_f, double T ){
 
 
 int main() {
+
+
+
     //defning constants
     double gate_voltage;
     double oxide_thickness;
@@ -68,8 +71,34 @@ int main() {
     
     
     printf("Parameters loaded successfully from input_parameters.txt\n");
-    
-    
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    FILE *datafile;
+    double *energy;
+    double *transmition;
+      int sample_points_count = 0;
+
+    energy = (double *)malloc(maxpoints * sizeof(double));
+    transmition = (double *)malloc(maxpoints * sizeof(double)); //allocation of memory for arrays
+  
+    datafile = fopen("transmition_data.txt", "r");
+   
+  if (datafile == NULL) {
+      printf("Error: Could not open file 'transmition_data.txt'\n");
+      free(energy);
+      free(transmition); //freeing memory is imp. as lot of space will be wasted!
+      return 1;
+  }
+  
+   while (sample_points_count < maxpoints && 
+          fscanf(datafile, "%lf %lf", &energy[sample_points_count], &transmition[sample_points_count]) == 2) {
+          sample_points_count++;
+    }
+
+    fclose(datafile);
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     
     return 0;
 }
