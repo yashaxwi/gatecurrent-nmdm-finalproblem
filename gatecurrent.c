@@ -2,8 +2,34 @@
 #include <stdlib.h>
 #include <math.h>
 
+
+
+#define k_B 8.617333e-5 //in eV/Kelvin
+#define q_magnitude 1.602e-19 //in Coulombs
+
+
+
+
 double sqre(double x){
   return x * x;//this function will return x^2...
+}
+
+
+
+double fermidirac(double E, double E_f, double T ){
+ 
+  double power = ( E - E_f ) / ( k_B * T );
+
+
+  if(power > 100){
+    return 0; //fermi function value will become 0
+  }
+
+  if(power < -100){
+    return 1; //fermi function value will become 1
+  }
+
+  return 1 / ( 1 + exp(power) );
 }
 
 
