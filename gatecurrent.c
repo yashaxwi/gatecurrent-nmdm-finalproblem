@@ -33,21 +33,33 @@ double fermidirac(double E, double E_f, double T ){
 }
 
 
+double integrand( double Ei, double T_Ei, double gate_voltage, double T ){
+
+double diff =  fermidirac( Ei , (-1)*gate_voltage , T ) - fermidirac( Ei , 0 , T );
+
+
+  return ( T_Ei * diff );
+  
+
+}
+
+
+
 
 int main() {
 
 
 
     //defning constants
-    double gate_voltage;
-    double oxide_thickness;
+    double gate_voltage; //V
+    double oxide_thickness; 
     double channel_thickness;
     double m_gate_eff;
     double m_oxide_eff;
     double m_channel_eff;
-    double Emin;
-    double Emax;
-    int slice_number;
+    double Emin; //eV
+    double Emax; //eV
+    int slice_number; //number
     
     //recording the data
     FILE *input_file = fopen("input_parameters.txt", "r");
@@ -97,7 +109,20 @@ int main() {
 
     fclose(datafile);
 
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+printf(" \n %e \n ",integrand( energy[75], transmition[75], gate_voltage, 300 ) );
+
+
+/*
+  printf("number of sample points is %d , 76th sample point data is %f %f",sample_points_count , energy[75], transmition[75]);
+*/
+  
+
+
+
+
+
+
+
 
     
     return 0;
