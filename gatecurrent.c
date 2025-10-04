@@ -2,13 +2,10 @@
 #include <stdlib.h>
 #include <math.h>
 
-
-
 #define maxpoints 10000 //datapoitns from tansmition_data.txt
 #define k_B 8.617333e-5 //in eV/kelvin
 #define q_magnitude 1.602e-19 //in coulombs
 #define h 6.62607015e-34 //planks constants
-
 
 double sqre(double x){
   return x * x;//this function will return x^2...
@@ -97,8 +94,6 @@ printf(" \n %e \n ",integrand( energy[75], transmition[75], gate_voltage, 300 ) 
   printf("number of sample points is %d , 76th sample point data is %f %f",sample_points_count , energy[75], transmition[75]);
 */
   
-
-
 double del = energy[1] - energy[0];
 int N = sample_points_count - 1;
 
