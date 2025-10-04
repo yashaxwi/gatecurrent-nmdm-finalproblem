@@ -51,12 +51,12 @@ int main() {
         return 1;
     }
         
-    int params_read = fscanf(input_file, "%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%d", &gate_voltage, &oxide_thickness, &channel_thickness, &m_gate_eff, &m_oxide_eff, &m_channel_eff, &Emin, &Emax, &slice_number);
+    int parameters_read = fscanf(input_file, "%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%d", &gate_voltage, &oxide_thickness, &channel_thickness, &m_gate_eff, &m_oxide_eff, &m_channel_eff, &Emin, &Emax, &slice_number);
     
        fclose(input_file);
     
-    if (params_read != 9) {
-        printf("Error: Expected 9 parameters but read %d\n", params_read);
+    if (parameters_read != 9) {
+        printf("ERROR: should read 9 parameters but read only %d\n", parameters_read);
         return 1;
     }
     
