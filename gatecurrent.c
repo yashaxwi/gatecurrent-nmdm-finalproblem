@@ -120,7 +120,7 @@ if (N % 2 == 0) {
         double fi_1 = integrand(energy[i + 1], transmition[i + 1], gate_voltage, 300);
         double fi_2 = integrand(energy[i + 2], transmition[i + 2], gate_voltage, 300);
 
-        integral_value += (del / 3.0) * (fi + 4 * fi_1 + fi_2);
+        integral_value += (del / 3.0) * (fi + (4*fi_1) + fi_2);
 
        //here we used the summation of area under each segment
 
@@ -138,7 +138,7 @@ else {
         double fi_1 = integrand(energy[i + 1], transmition[i + 1], gate_voltage, 300);
         double fi_2 = integrand(energy[i + 2], transmition[i + 2], gate_voltage, 300);
 
-        integral_value += (del / 3.0) * (fi + 4 * fi_1 + fi_2);
+        integral_value += (del / 3.0) * (fi + (4*fi_1) + fi_2);
     }
 
     //trapezoidal part
