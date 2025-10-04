@@ -7,16 +7,12 @@
 #define maxpoints 10000 //datapoitns from tansmition_data.txt
 #define k_B 8.617333e-5 //in eV/kelvin
 #define q_magnitude 1.602e-19 //in coulombs
-#define h 6.62607015e-34 //planks constant
-
-
+#define h 6.62607015e-34 //planks constants
 
 
 double sqre(double x){
   return x * x;//this function will return x^2...
 }
-
-
 
 double fermidirac(double E, double E_f, double T ){
  
@@ -25,7 +21,6 @@ double fermidirac(double E, double E_f, double T ){
   if(power > 100){
     return 0; //fermi function value will become 0
   }
-
   if(power < -100){
     return 1; //fermi function value will become 1
   }
@@ -33,23 +28,12 @@ double fermidirac(double E, double E_f, double T ){
   return 1 / ( 1 + exp(power) );
 }
 
-
 double integrand( double Ei, double T_Ei, double gate_voltage, double T ){
-
 double diff =  fermidirac( Ei , (-1)*gate_voltage , T ) - fermidirac( Ei , 0 , T );
-
-
   return ( T_Ei * diff );
-  
-
 }
 
-
-
-
 int main() {
-
-
 
     //defning constants
     double gate_voltage; //V
@@ -69,21 +53,16 @@ int main() {
         printf("Error: Could not open input_parameters.txt\n");
         return 1;
     }
-    
-    
+        
     int params_read = fscanf(input_file, "%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%d", &gate_voltage, &oxide_thickness, &channel_thickness, &m_gate_eff, &m_oxide_eff, &m_channel_eff, &Emin, &Emax, &slice_number);
     
        fclose(input_file);
-    
     
     if (params_read != 9) {
         printf("Error: Expected 9 parameters but read %d\n", params_read);
         return 1;
     }
     
-    
-    
-
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     FILE *datafile;
     double *energy;
@@ -163,12 +142,5 @@ else {
 
 printf("\nintegral result %.6e\n", integral_value);
 
-
-
-
-
-
-
-    
     return 0;
 }
