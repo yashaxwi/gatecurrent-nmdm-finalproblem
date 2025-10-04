@@ -1,3 +1,19 @@
+/*
+   Code reads for V_bias, Emin, Emax from 'input_parameters.txt'  
+   It takes the values of transmission probability from 'transmition_data.txt'  
+   Code performs Simpson's method for integration and outputs the gate current using Launder's formula (1-D)
+  
+   I = (2q / h) × ∫[Emin to Emax] { T(E) x [ f1(E) – f2(E) ] dE }
+  
+   I is required gate current  
+   q is electronic charge  
+   h is Planck's constant  
+   T(E) is transmission probability at some E  
+   f1(E), f2(E) are fermi distributions at channel and gate
+ */
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -90,7 +106,7 @@ printf(" \n %e \n ",integrand( energy[75], transmition[75], gate_voltage, 300 ) 
 */
 
 /*
-  printf("number of sample points is %d , 76th sample point data is %f %f",sample_points_count , energy[75], transmition[75]);//just to check whether it's taking inputs properly or not
+  printf("no.of sample pts. %d , 76th sample pt  %f %f",sample_points_count , energy[75], transmition[75]);
 */
   
 double del = energy[1] - energy[0];
@@ -135,7 +151,7 @@ else {
 }
 
 
-  double gatecurrentvalue = (integral_value)*(2)*(sqre(q_magnitude)/h);
+  double gatecurrentvalue = (integral_value)*(2)*(sqre(q_magnitude)/h);//sqre converts eV into J
 
 
 FILE *gtcrntoutput;
@@ -147,14 +163,15 @@ if (gtcrntoutput == NULL) {
     return 1;
 }
   
-fprintf(gtcrntoutput, "\nthe value of integral is %e\n", integral_value);
-fprintf(gtcrntoutput, "\nthe value of gate current is %e\n", gatecurrentvalue);
+fprintf(gtcrntoutput, "\nThe value of Gate current is %e Amp\n", gatecurrentvalue);
   
 
 fclose(gtcrntoutput);
 
 
-  printf("integral value and gatecurrent values are printed into output.txt :)");
+  printf("Gatecurrent value is printed into output.txt (^_^)");
 
     return 0;
 }
+
+

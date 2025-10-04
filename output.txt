@@ -1,4 +1,2 @@
 
-the value of integral is -3.867044e-14
-
-the value of gate current is -2.995561e-18
+The value of Gate current is -2.995561e-18 Amp
