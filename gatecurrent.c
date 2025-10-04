@@ -60,7 +60,6 @@ int main() {
         return 1;
     }
     
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     FILE *datafile;
     double *energy;
     double *transmition;
@@ -135,7 +134,6 @@ else {
     integral_value += 0.5 * del * (last1 + last2);
 }
 
-printf("\nintegral result %.6e\n", integral_value);
 
   double gatecurrentvalue = (integral_value)*(2)*(sqre(q_magnitude)/h);
 
@@ -151,9 +149,12 @@ if (gtcrntoutput == NULL) {
   
 fprintf(gtcrntoutput, "\nthe value of integral is %e\n", integral_value);
 fprintf(gtcrntoutput, "\nthe value of gate current is %e\n", gatecurrentvalue);
-  fprintf(gtcrntoutput, "\n:)\n");
+  
 
 fclose(gtcrntoutput);
+
+
+  printf("integral value and gatecurrent values are printed into output.txt :)");
 
     return 0;
 }
