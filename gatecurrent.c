@@ -5,8 +5,9 @@
 
 
 #define maxpoints 10000 //datapoitns from tansmition_data.txt
-#define k_B 8.617333e-5 //in eV/Kelvin
-#define q_magnitude 1.602e-19 //in Coulombs
+#define k_B 8.617333e-5 //in eV/kelvin
+#define q_magnitude 1.602e-19 //in coulombs
+#define h 6.62607015e-34 //planks constant
 
 
 
@@ -82,7 +83,6 @@ int main() {
     
     
     
-    printf("Parameters loaded successfully from input_parameters.txt\n");
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     FILE *datafile;
@@ -109,14 +109,59 @@ int main() {
 
     fclose(datafile);
 
-printf(" \n %e \n ",integrand( energy[75], transmition[75], gate_voltage, 300 ) );
 
+/*
+printf(" \n %e \n ",integrand( energy[75], transmition[75], gate_voltage, 300 ) );
+*/
 
 /*
   printf("number of sample points is %d , 76th sample point data is %f %f",sample_points_count , energy[75], transmition[75]);
 */
   
 
+
+double del = energy[1] - energy[0];
+int N = sample_points_count - 1;
+
+double integral_value = 0.0;
+
+  //if we have odd number of points (which implied and is implied that) N is even (in our case its 4999 but it may vary depending on tansmition_data.txt and input_parameters.txt)
+if (N % 2 == 0) {
+    for (int i = 0; i <= N - 2; i += 2) {
+        if (energy[i] < Emin || energy[i + 2] > Emax) continue;
+
+        double fi = integrand(energy[i], transmition[i], gate_voltage, 300);
+        double fi_1 = integrand(energy[i + 1], transmition[i + 1], gate_voltage, 300);
+        double fi_2 = integrand(energy[i + 2], transmition[i + 2], gate_voltage, 300);
+
+        integral_value += (del / 3.0) * (fi + 4 * fi_1 + fi_2);
+
+       //here we used the summation of area under each segment
+
+    }
+}
+  //if we have odd number of points or N is odd then one segment will be left at last, for which we use trapezoidal
+else {
+    int last_index = N - 1;
+
+    //simpsons part
+    for (int i = 0; i <= N - 3; i += 2) {
+        if (energy[i] < Emin || energy[i + 2] > Emax) continue;
+
+        double fi = integrand(energy[i], transmition[i], gate_voltage, 300);
+        double fi_1 = integrand(energy[i + 1], transmition[i + 1], gate_voltage, 300);
+        double fi_2 = integrand(energy[i + 2], transmition[i + 2], gate_voltage, 300);
+
+        integral_value += (del / 3.0) * (fi + 4 * fi_1 + fi_2);
+    }
+
+    //trapezoidal part
+    double last1 = integrand(energy[N - 1], transmition[N - 1], gate_voltage, 300);
+    double last2 = integrand(energy[N], transmition[N], gate_voltage, 300);
+    integral_value += 0.5 * del * (last1 + last2);
+}
+
+printf("\nintegral result %.6e\n", integral_value);
 
 
 
@@ -127,4 +172,3 @@ printf(" \n %e \n ",integrand( energy[75], transmition[75], gate_voltage, 300 ) 
     
     return 0;
 }
-
