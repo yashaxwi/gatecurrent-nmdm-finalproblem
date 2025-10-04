@@ -47,7 +47,7 @@ int main() {
     FILE *input_file = fopen("input_parameters.txt", "r");
     
     if (input_file == NULL) {
-        printf("Error: Could not open input_parameters.txt\n");
+        printf("ERROR: can't open input_parameters.txt :(\n");
         return 1;
     }
         
@@ -72,7 +72,7 @@ int main() {
     datafile = fopen("transmition_data.txt", "r");
    
   if (datafile == NULL) {
-      printf("Error: Could not open file 'transmition_data.txt'\n");
+      printf("ERROR: can't open file transmition_data.txt :(\n");
       free(energy);
       free(transmition); //freeing memory is imp. as lot of space will be wasted!
       return 1;
@@ -136,6 +136,23 @@ else {
 }
 
 printf("\nintegral result %.6e\n", integral_value);
+
+  double gatecurrentvalue = (integral_value)*(2)*(sqre(q_magnitude)/h);
+
+
+FILE *gtcrntoutput;
+
+gtcrntoutput = fopen("output.txt", "w");
+
+if (gtcrntoutput == NULL) {
+    printf("can't open output,txt :(\n");
+    return 1;
+}
+  
+fprintf(gtcrntoutput, "\nthe value of integral is %e\n", integral_value);
+fprintf(gtcrntoutput, "\nthe value of gate current is %e\n", gatecurrentvalue);
+
+fclose(gtcrntoutput);
 
     return 0;
 }
