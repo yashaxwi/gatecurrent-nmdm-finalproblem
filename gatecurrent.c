@@ -12,8 +12,6 @@
    f1(E), f2(E) are fermi distributions at channel and gate
  */
 
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -100,7 +98,6 @@ int main() {
 
     fclose(datafile);
 
-
 /*
 printf(" \n %e \n ",integrand( energy[75], transmition[75], gate_voltage, 300 ) );
 */
@@ -150,7 +147,6 @@ else {
     integral_value += 0.5 * del * (last1 + last2);
 }
 
-
   double gatecurrentvalue = (integral_value)*(2)*(sqre(q_magnitude)/h);//sqre converts eV into J
 
 
@@ -164,10 +160,7 @@ if (gtcrntoutput == NULL) {
 }
   
 fprintf(gtcrntoutput, "\nThe value of Gate current is %e Amp\n", gatecurrentvalue);
-  
-
 fclose(gtcrntoutput);
-
 
   printf("Gatecurrent value is printed into output.txt (^_^)");
 
