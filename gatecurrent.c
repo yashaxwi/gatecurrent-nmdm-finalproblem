@@ -91,7 +91,7 @@ printf(" \n %e \n ",integrand( energy[75], transmition[75], gate_voltage, 300 ) 
 */
 
 /*
-  printf("number of sample points is %d , 76th sample point data is %f %f",sample_points_count , energy[75], transmition[75]);
+  printf("number of sample points is %d , 76th sample point data is %f %f",sample_points_count , energy[75], transmition[75]);//just to check whether it's taking niputs properly or not
 */
   
 double del = energy[1] - energy[0];
