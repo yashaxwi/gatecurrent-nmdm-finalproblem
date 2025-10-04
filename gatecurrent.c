@@ -151,6 +151,7 @@ if (gtcrntoutput == NULL) {
   
 fprintf(gtcrntoutput, "\nthe value of integral is %e\n", integral_value);
 fprintf(gtcrntoutput, "\nthe value of gate current is %e\n", gatecurrentvalue);
+  fprintf(gtcrntoutput, "\n:)\n");
 
 fclose(gtcrntoutput);
 
