@@ -147,7 +147,7 @@ else {
     integral_value += 0.5 * del * (last1 + last2);
 }
 
-  double gatecurrentvalue = (integral_value)*(2)*(sqre(q_magnitude)/h);//sqre converts eV into J
+  double gatecurrentvalue = (integral_value)*(2)*(sqre(q_magnitude)/h);//another q converts eV into J
 
 
 FILE *gtcrntoutput;
