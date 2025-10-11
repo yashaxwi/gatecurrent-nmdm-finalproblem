@@ -1,2 +1,2 @@
 
-The value of Gate current is -2.995561e-18 Amp
+The value of Gate current is -1.076021e-09 Amp

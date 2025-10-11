@@ -25,9 +25,9 @@ double sqre(double x){
   return x * x;//this function will return x^2...
 }
 
-double fermidirac(double E, double E_f, double T ){
+double nrdr(double E, double E_f, double T ){
  
-  double power = ( E - E_f ) / ( k_B * T );
+  double power = (-1)*( E - E_f ) / ( k_B * T );
 
   if(power > 100){
     return 0; //fermi function value will become 0
@@ -36,12 +36,15 @@ double fermidirac(double E, double E_f, double T ){
     return 1; //fermi function value will become 1
   }
 
-  return 1 / ( 1 + exp(power) );
+  return (1 + exp(power));
 }
 
 double integrand( double Ei, double T_Ei, double gate_voltage, double T ){
-double diff =  fermidirac( Ei , (-1)*gate_voltage , T ) - fermidirac( Ei , 0 , T );
-  return ( T_Ei * diff );
+
+double diff = log(nrdr( Ei, (-1)*gate_voltage, T )) - log(nrdr( Ei, 0, T ));
+
+return ((k_B)*(T)*(diff));
+//double diff =  fermidirac( Ei , (-1)*gate_voltage , T ) - fermidirac( Ei , 0 , T );
 }
 
 int main() {
